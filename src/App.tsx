@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import './App.scss';
+import SearchBar from './components/SearchBar/SearchBar';
+import WeatherLocation from './components/WeatherLocation/WeatherLocation';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+    const [locations, setLocations] = useState<string[]>([]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    const handleSearch = (location: string) => {
+        if (!locations.includes(location)) {
+            setLocations([...locations, location]);
+        }
+    };
 
-export default App
+    const handleRemoveLocation = (location: string) => {
+        setLocations(locations.filter(loc => loc !== location));
+    };
+
+    useEffect(() => {
+        const storedLocations = localStorage.getItem('locations');
+        if (storedLocations) {
+            setLocations(JSON.parse(storedLocations));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('locations', JSON.stringify(locations));
+    }, [locations]);
+
+    return (
+        <div className="app">
+            <h1>Приложение Погода</h1>
+            <SearchBar onSearch={handleSearch} />
+            <div className="weather-cards">
+                {locations.map((location) => (
+                    <WeatherLocation
+                        key={location}
+                        location={location}
+                        onRemove={() => handleRemoveLocation(location)}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export default App;
