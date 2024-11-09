@@ -63,12 +63,21 @@ $button-color: #007bff;
         border-radius: 8px;
         padding: 20px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: background-color 0.2s;
 
-        h2 {
-            margin-top: 0;
+        .weather-card-content {
+            width: 100%;
         }
 
-        button {
+        .remove-button {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
             background-color: red;
             color: white;
             border: none;
@@ -79,28 +88,41 @@ $button-color: #007bff;
                 background-color: darken(red, 10%);
             }
         }
+
+        &.hovered .remove-button {
+            display: block;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        @media (max-width: 600px) {
+            width: 100%;
+            height: auto;
+            padding: 10px;
+
+            h2 {
+                margin-bottom: 10px;
+            }
+
+            img {
+                margin-bottom: 10px;
+            }
+
+            p {
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (min-width: 601px) {
+            &:hover .remove-button {
+                display: block;
+            }
+        }
     }
 
-		@media (max-width: 600px) {
-			.search-bar {
-					input {
-							width: 100%;
-					}
-
-					button {
-							margin-left: 0;
-							margin-top: 10px;
-							width: 100%;
-					}
-			}
-
-			.weather-cards {
-					flex-direction: column;
-					align-items: center;
-			}
-
-			.weather-card {
-					width: 100%;
-			}
-	}
+    .visible {
+        display: block !important;
+    }
 }
