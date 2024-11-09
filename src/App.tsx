@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.scss';
 import SearchBar from './components/SearchBar/SearchBar';
 import WeatherLocation from './components/WeatherLocation/WeatherLocation';
+import './i18n';
 
 const App: React.FC = () => {
     const [locations, setLocations] = useState<string[]>([]);

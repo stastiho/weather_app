@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface SearchBarProps {
     onSearch: (location: string) => void;
@@ -7,6 +8,7 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     const [inputValue, setInputValue] = useState('');
     const [suggestions, setSuggestions] = useState<string[]>([]);
+		const { t } = useTranslation();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -26,7 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 type="text"
                 value={inputValue}
                 onChange={handleInputChange}
-                placeholder="Введите город"
+								placeholder={t("search_city")}
             />
             <button onClick={handleSearch}>Поиск</button>
             {suggestions.length > 0 && (
