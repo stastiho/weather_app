@@ -10,27 +10,41 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     const [inputValue, setInputValue] = useState('');
     const [suggestions, setSuggestions] = useState<string[]>([]);
+    const [errorMessage, setErrorMessage] = useState('');
     const { t } = useTranslation();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setInputValue(value);
+        setErrorMessage('');
         debouncedSearch(value);
     };
 
     const debouncedSearch = debounce(async (value: string) => {
         if (value.trim()) {
-            const suggestions = await getCitySuggestions(value);
-            setSuggestions(suggestions.map((suggestion: any) => suggestion.name));
+            try {
+                const suggestions = await getCitySuggestions(value);
+                if (suggestions.length === 0) {
+                    setErrorMessage(t("error_message"));
+                } else {
+                    setSuggestions(suggestions.map((suggestion: any) => suggestion.name));
+                }
+            } catch (error) {
+                setErrorMessage(t("error_message"));
+            }
         } else {
             setSuggestions([]);
         }
     }, 300);
 
     const handleSearch = (location: string) => {
-        onSearch(location.trim());
-        setInputValue('');
-        setSuggestions([]);
+        if (suggestions.includes(location)) {
+            onSearch(location.trim());
+            setInputValue('');
+            setSuggestions([]);
+        } else {
+            setErrorMessage(t("error_message"));
+        }
     };
 
     return (
@@ -39,9 +53,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 type="text"
                 value={inputValue}
                 onChange={handleInputChange}
-								placeholder={t("search_city")}
+                placeholder={t("search_city")}
             />
-            <button onClick={() => handleSearch(inputValue)}>Поиск</button>
+            <button onClick={() => handleSearch(inputValue)}>{t("search")}</button>
+            {errorMessage && <div className="error">{errorMessage}</div>}
             {suggestions.length > 0 && (
                 <ul className="suggestions">
                     {suggestions.map((suggestion) => (

@@ -75,7 +75,9 @@ const resources = {
             "patchy_light_rain_with_thunder": "Patchy light rain with thunder",
             "moderate_or_heavy_rain_with_thunder": "Moderate or heavy rain with thunder",
             "patchy_light_snow_with_thunder": "Patchy light snow with thunder",
-            "moderate_or_heavy_snow_with_thunder": "Moderate or heavy snow with thunder"
+            "moderate_or_heavy_snow_with_thunder": "Moderate or heavy snow with thunder",
+						"error_message": "No matching location found.",
+						"search": "Search",
         }
     },
     ru: {
@@ -151,7 +153,9 @@ const resources = {
             "patchy_light_rain_with_thunder": "Мелкий дождь с грозой",
             "moderate_or_heavy_rain_with_thunder": "Умеренный или сильный дождь с грозой",
             "patchy_light_snow_with_thunder": "Мелкий снег с грозой",
-            "moderate_or_heavy_snow_with_thunder": "Умеренный или сильный снег с грозой"
+            "moderate_or_heavy_snow_with_thunder": "Умеренный или сильный снег с грозой",
+						"error_message": "Не найдено совпадающих мест.",
+						"search": "Поиск",
         }
     }
 };

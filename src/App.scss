@@ -38,9 +38,13 @@ $button-color: #007bff;
             cursor: pointer;
 
             &:hover {
-                background-color: darken($button-color, 10%);
+							background-color: darken($button-color, 10%);
             }
         }
+				.error {
+					color: red;
+					padding-top: 5px;
+				}
 
         .suggestions {
             list-style-type: none;
