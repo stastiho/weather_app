@@ -34,6 +34,7 @@ const resources = {
             "squall": "Squall",
             "tornado": "Tornado",
             "search_city": "Search City",
+						"clear": "Clear"
         }
     },
     ru: {
@@ -68,6 +69,7 @@ const resources = {
             "squall": "Шквал",
             "tornado": "Торнадо",
             "search_city": "Поиск города",
+						"clear": "Ясно"
         }
     }
 };
