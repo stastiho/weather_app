@@ -31,7 +31,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ location, temperature, weathe
 					<div className="weather-card-content">
 							<h2>{location}</h2>
 							<img src={weatherIcon} alt={weatherDescription} />
-							<p>{t(weatherDescription?.toLowerCase().replaceAll(' ', '_'))}</p>
+							<p>{t(weatherDescription?.toLowerCase().split(' ').join('_'))}</p>
 							<p>Температура: {temperature}°C</p>
 					</div>
 			</div>
