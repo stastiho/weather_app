@@ -5,7 +5,10 @@ import WeatherLocation from './components/WeatherLocation/WeatherLocation';
 import './i18n';
 
 const App: React.FC = () => {
-    const [locations, setLocations] = useState<string[]>([]);
+	const [locations, setLocations] = useState<string[]>(() => {
+			const storedLocations = localStorage.getItem('locations');
+			return storedLocations ? JSON.parse(storedLocations) : [];
+	});
 
     const handleSearch = (location: string) => {
         if (!locations.includes(location)) {

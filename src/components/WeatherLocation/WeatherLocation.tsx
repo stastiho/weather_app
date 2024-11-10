@@ -16,10 +16,10 @@ const WeatherLocation: React.FC<WeatherLocationProps> = ({ location, onRemove })
 
     return (
         <WeatherCard
-            location={data?.location.name || location}
-            temperature={data?.current.temp_c || 0}
-            weatherIcon={data?.current.condition.icon}
-            weatherDescription={data?.current.condition.text}
+            location={data?.location?.name || location}
+            temperature={data?.current?.temp_c || 0}
+            weatherIcon={data?.current?.condition?.icon}
+            weatherDescription={data?.current?.condition?.text}
             onRemove={onRemove}
         />
     );

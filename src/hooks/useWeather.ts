@@ -8,22 +8,26 @@ export const useWeather = (location: string) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchWeather = async () => {
-            setLoading(true);
+			const fetchWeather = async () => {
+				const cachedData = localStorage.getItem(`weather_${location}`);
+				if (cachedData) {
+						setData(JSON.parse(cachedData));
+						setLoading(false);
+				} else {
             try {
                 const response = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${location}`);
                 setData(response.data);
-            } catch (error) {
-                console.error("Error fetching weather data:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+								localStorage.setItem(`weather_${location}`, JSON.stringify(response.data));
+						} catch (error) {
+								console.error('Ошибка при получении данных о погоде:', error);
+						} finally {
+								setLoading(false);
+						}
+				}
+		};
 
-        if (location) {
-            fetchWeather();
-        }
-    }, [location]);
+		fetchWeather();
+}, [location]);
 
-    return { data, loading };
+return { data, loading };
 };
