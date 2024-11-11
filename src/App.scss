@@ -13,13 +13,14 @@ $button-color: #007bff;
         background-color: white;
         padding: 10px;
 				margin-bottom: 20px;
+				border-bottom: 1px solid #ccc;
         z-index: 1000;
 
         h1 {
             margin-bottom: 20px;
         }
 		}
-		
+
     .weather-cards {
         display: flex;
         flex-wrap: wrap;
@@ -35,6 +36,7 @@ $button-color: #007bff;
             border: 1px solid #ccc;
             border-radius: 4px;
             width: 200px;
+						margin-bottom: 10px;
         }
 
         button {

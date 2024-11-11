@@ -48,6 +48,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
             onSearch(location.trim());
             setInputValue('');
             setSuggestions([]);
+            setErrorMessage('');
         } else {
             setErrorMessage(t("error_message"));
         }
@@ -68,7 +69,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
             {suggestions.length > 0 && (
                 <ul className="suggestions">
                     {suggestions.map((suggestion) => (
-                        <li key={suggestion} onClick={() => handleSearch(suggestion)}>
+                        <li
+                            key={suggestion}
+                            onClick={() => handleSearch(suggestion)}
+                            onTouchStart={() => handleSearch(suggestion)}
+                        >
                             {suggestion}
                         </li>
                     ))}

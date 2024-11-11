@@ -38,14 +38,14 @@ const App: React.FC = () => {
 							<SearchBar onSearch={handleSearch} />
 					</div>
 					<div className="weather-cards">
-							{locations.map((location) => (
-									<WeatherLocation
-											key={location}
-											location={location}
-											onRemove={() => handleRemoveLocation(location)}
-									/>
-							))}
-					</div>
+              {locations.map((location) => (
+                  <WeatherLocation
+                      key={location}
+                      location={location}
+                      onRemove={() => handleRemoveLocation(location)}
+                  />
+              )).reverse()}
+          </div>
 			</div>
 	);
 };
