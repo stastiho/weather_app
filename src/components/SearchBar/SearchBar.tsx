@@ -17,7 +17,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         const value = e.target.value;
         setInputValue(value);
         setErrorMessage('');
-        debouncedSearch(value);
+        if (value.trim()) {
+            debouncedSearch(value);
+        } else {
+            setSuggestions([]);
+            setErrorMessage('');
+        }
     };
 
     const debouncedSearch = debounce(async (value: string) => {
@@ -34,6 +39,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
             }
         } else {
             setSuggestions([]);
+            setErrorMessage('');
         }
     }, 300);
 
@@ -55,7 +61,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 onChange={handleInputChange}
                 placeholder={t("search_city")}
             />
-            <button onClick={() => handleSearch(inputValue)}>{t("search")}</button>
+            <button onClick={() => handleSearch(inputValue)} disabled={!inputValue.trim()}>
+                {t("search")}
+            </button>
             {errorMessage && <div className="error">{errorMessage}</div>}
             {suggestions.length > 0 && (
                 <ul className="suggestions">

@@ -32,20 +32,22 @@ const App: React.FC = () => {
     }, [locations]);
 
     return (
-        <div className="app">
-            <h1>Приложение Погода</h1>
-            <SearchBar onSearch={handleSearch} />
-            <div className="weather-cards">
-                {locations.map((location) => (
-                    <WeatherLocation
-                        key={location}
-                        location={location}
-                        onRemove={() => handleRemoveLocation(location)}
-                    />
-                ))}
-            </div>
-        </div>
-    );
+			<div className="app">
+					<div className="header">
+							<h1>Приложение Погода</h1>
+							<SearchBar onSearch={handleSearch} />
+					</div>
+					<div className="weather-cards">
+							{locations.map((location) => (
+									<WeatherLocation
+											key={location}
+											location={location}
+											onRemove={() => handleRemoveLocation(location)}
+									/>
+							))}
+					</div>
+			</div>
+	);
 };
 
 export default App;

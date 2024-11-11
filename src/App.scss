@@ -7,10 +7,19 @@ $button-color: #007bff;
     padding: 20px;
     text-align: center;
 
-    h1 {
-        margin-bottom: 20px;
-    }
+    .header {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        padding: 10px;
+				margin-bottom: 20px;
+        z-index: 1000;
 
+        h1 {
+            margin-bottom: 20px;
+        }
+		}
+		
     .weather-cards {
         display: flex;
         flex-wrap: wrap;
