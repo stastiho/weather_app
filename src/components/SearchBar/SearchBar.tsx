@@ -33,6 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                     setErrorMessage(t("error_message"));
                 } else {
                     setSuggestions(suggestions.map((suggestion: any) => suggestion.name));
+										setErrorMessage('');
                 }
             } catch (error) {
                 setErrorMessage(t("error_message"));
